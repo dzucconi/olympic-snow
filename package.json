@@ -34,7 +34,6 @@
   },
   "dependencies": {
     "frame-interval": "0.0.2",
-    "imagesloaded": "^4.1.2",
-    "queryparams": "0.0.7"
+    "imagesloaded": "^4.1.2"
   }
 }
