@@ -1,35 +1,32 @@
-import parameters from 'queryparams';
-
+import fps from 'frame-interval';
+import imagesLoaded from 'imagesloaded';
 import randomize from './lib/randomize';
-
-window.parameters = parameters;
 
 const DOM = {
   app: document.getElementById('app'),
-};
-
-const { width, height } = parameters({
-  width: 75,
-  height: 75,
-});
-
-const canvas = document.createElement('canvas');
-
-canvas.width = width;
-canvas.height = height;
-
-const ctx = canvas.getContext('2d');
-const image = ctx.createImageData(height, width);
-
-const tick = () => {
-  randomize(image.data);
-  ctx.putImageData(image, 0, 0);
-  DOM.app.style.backgroundImage = `url(${canvas.toDataURL('image/png')})`;
+  stage: document.getElementById('stage'),
+  rings: document.getElementById('rings'),
 };
 
 export default () => {
-  (function loop() {
-    tick();
-    requestAnimationFrame(loop);
-  })();
+  const canvas = document.createElement('canvas');
+
+  DOM.stage.appendChild(canvas);
+
+  imagesLoaded(DOM.app, () => {
+    const width = DOM.rings.width;
+    const height = DOM.rings.height;
+
+    canvas.width = width;
+    canvas.height = height;
+
+    const ctx = canvas.getContext('2d');
+    const image = ctx.createImageData(width, height);
+
+
+    fps(requestAnimationFrame)(60, () => {
+      randomize(image.data);
+      ctx.putImageData(image, 0, 0);
+    })();
+  });
 };
