@@ -33,8 +33,6 @@
     "uglify-js-brunch": "^2.0.0"
   },
   "dependencies": {
-    "pixi-noise-filter": "0.0.3",
-    "pixi.js": "^4.5.2",
     "queryparams": "0.0.7"
   }
 }
